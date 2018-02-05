@@ -1,0 +1,13 @@
+{
+  "name": "patelserver",
+  "version": "1.0.0",
+  "description": "creat read update delete",
+  "main": "index.js",
+  "author": "Hadas Ganim",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "mysql": "^2.15.0"
+  }
+}
