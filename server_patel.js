@@ -23,9 +23,6 @@ app.use('/js', express.static(__dirname + '/node_modules/jquery/dist'));
 app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
 
 
-
-
-
 var connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
@@ -33,6 +30,24 @@ var connection = mysql.createConnection({
     database: 'sampledb',
 });
 
+// set const
+const siteTitle = "Welcome Simple App";
+const baseURL = "http://localhost:1337/"
+
+// express wait for the user to enter a URL
+app.get('/',function(req,resp){
+    // resp.end("here comes the html...")
+
+    connection.query("SELECT * FROM sampletable" , function(err, result){
+    	console.log(result);
+	   	resp.render('pages/index',{
+	   		siteTitle : siteTitle,
+	   		pageTitle : "Sample Table",
+	   		items : result
+		});
+    });
+
+});
 
 connection.connect(function(error){
 	//callback
@@ -43,11 +58,6 @@ connection.connect(function(error){
 	}
 })
 
-// express wait for the user to enter a URL
-app.get('/',function(req,resp){
-    resp.end("here comes the html...")
-
-})
 
 app.listen(1337, function(){
 	console.log('listening on 1337');
